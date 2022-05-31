@@ -1,0 +1,20 @@
+#!/bin/bash
+# ipbc - Inter Planetary Bash Chat
+while true
+do
+	while IFS="" read -r p || [ -n "$p"]
+	do
+		if [ ! $p == '' ]
+		then
+			check="$(ipfs name resolve $p)"
+			if [ ! "$check"  == "$latest" ]
+			then
+				ipfs cat /ipns/"$p"
+				latest="$(ipfs name resolve $p)"
+			fi
+		else
+			break
+		fi
+	done < ~/following-ipbc-keys
+	sleep 10
+done

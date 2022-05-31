@@ -1,0 +1,39 @@
+ipbc - Inter Planetary Bash Chat
+--------------------------------
+
+This program creates a chat system with IPFS backend to send and retrieve data.
+
+You never actually send data, but people following your IPNS "chat" key will wait or
+check if you published a new IPFS link over the same key. Of course you will be doing
+the same to retrieve external messages.
+
+## Setup
+``` console
+ipfs key gen my-ipbc-key
+```
+
+## "Post" message
+
+``` console
+post() {
+	ipfs name publish --key=my-ipbc-key $( echo "{\"message\":\"$1\",\"previous\":\"$(ipfs key list -l | grep my-ipbc-key | awk '{print $1}')\"}" | ipfs add -q ) 
+}
+```
+## Follow someone
+
+``` console
+follow(){
+	echo "$1" >> ~/following-ipbc-keys
+}
+```
+
+## Read their feeds
+
+``` console
+whatsup(){
+	while IFS="" read -r p || [ -n "$p"]
+	do
+		ipfs cat /ipns/"$p" | json_pp
+	done < ~/following-ipbc-keys
+}
+```
