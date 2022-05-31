@@ -11,7 +11,9 @@ Of course `bash` is mandatory. `git` to clone the repo. You can download it thro
 
 You can find `bash` on any Linux distribution. Head over to dist.ipfs.io to download and setup ipfs.
 
-Lastly, IPFS daemon should be running on background.
+IPFS daemon should be running on background.
+
+Lastly, I pipe some contents to `json_pp`. It's a perl package, you can probably find it in your Linux distribution.
 
 
 ## Usage
