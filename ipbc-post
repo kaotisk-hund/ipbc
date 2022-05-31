@@ -5,5 +5,6 @@ if [ ! -z "$1" ]
 then
 	resolved=$(ipfs key list -l | grep my-ipbc-key | awk '{print $1}' | sed -e 's/\/ipfs\///g')
 	previous=$(ipfs name resolve $resolved)
-	ipfs name publish --key=my-ipbc-key $( echo "{\"message\":\"$1\",\"previous\":\"$previous\"}" | ipfs add -q )
+	message=$(echo "$1" | ipfs add -q)
+	ipfs name publish --key=my-ipbc-key $( echo "{\"message\":\"$message\",\"previous\":\"$previous\"}" | ipfs add -q )
 fi

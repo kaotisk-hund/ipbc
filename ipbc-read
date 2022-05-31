@@ -9,8 +9,10 @@ do
 			check="$(ipfs name resolve $p)"
 			if [ ! "$check"  == "$latest" ]
 			then
-				ipfs cat /ipns/"$p"
+				from="$p"
+				message="$(ipfs cat /ipns/$p | json_pp |  sed -e 's/{//g' | sed -e 's/}//g' | sed -e 's/":"/=/g' | sed -e 's/"//g' | sed -e 's/,//g' | sed -e 's/ //g' | grep message | sed -e 's/message://')"
 				latest="$(ipfs name resolve $p)"
+				echo "$p : $(ipfs cat $message)"
 			fi
 		else
 			break
