@@ -1,17 +1,19 @@
 #!/bin/bash
 # ipbc - Inter Planetary Bash Chat
+declare -A latest
+declare -A check
 while true
 do
 	while IFS="" read -r p || [ -n "$p"]
 	do
 		if [ ! $p == '' ]
 		then
-			check="$(ipfs name resolve $p)"
-			if [ ! "$check"  == "$latest" ]
+			check[$p]="$(ipfs name resolve $p)"
+			if [ ! "${check[$p]}"  == "${latest[$p]}" ]
 			then
 				from="$p"
 				message="$(ipfs cat /ipns/$p | json_pp |  sed -e 's/{//g' | sed -e 's/}//g' | sed -e 's/":"/=/g' | sed -e 's/"//g' | sed -e 's/,//g' | sed -e 's/ //g' | grep message | sed -e 's/message://')"
-				latest="$(ipfs name resolve $p)"
+				latest[$p]="$(ipfs name resolve $p)"
 				echo "$p : $(ipfs cat $message)"
 			fi
 		else
