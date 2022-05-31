@@ -8,18 +8,18 @@ check if you published a new IPFS link over the same key. Of course you will be 
 the same to retrieve external messages.
 
 ## Usage
-
+``` console
 git clone https://github.com/kaotisk-hund/ipbc
 cd ipbc
 sh setup.sh
-
+```
 ## Follow me or someone
-./ipbc-follow <ipns-link>
+`./ipbc-follow <ipns-link>`
 
 ## Publish message
 
-./ipbc-post "Your message here"
+`./ipbc-post "Your message here"`
 
 ## Read the latest messages and wait for new ones
 
-./ipbc-read
+`./ipbc-read`
