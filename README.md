@@ -24,26 +24,27 @@ This will create a key for ipns called 'my-ipbc-key'.
 ``` console
 git clone https://github.com/kaotisk-hund/ipbc
 cd ipbc
+sudo make install
 sh setup.sh
 ```
 ## Follow me or someone
 
 You can follow other 'ipbc-keys' that are actually just ipns-links.
 
-`./ipbc-follow <ipns-link>`
+`ipbc-follow <ipns-link>`
 
 ## Publish message
 
 When we publish a message, we create a reference to our previous message in order for new comers to find the previous messages of ours.
 
-`./ipbc-post "Your message here"`
+`ipbc-post "Your message here"`
 
 ## Read the latest messages
 > and wait for new ones
 
 We start reading our following list and wait for new messages to appear. There is an interval of 10 seconds by default, but you can change it in the script.
 
-`./ipbc-read`
+`ipbc-read`
 
 ## Read message history
 
